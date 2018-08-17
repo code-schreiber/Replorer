@@ -8,7 +8,6 @@ import com.toolslab.replorer.base_repository.model.RepositoryViewModel
 import org.amshove.kluent.shouldEqual
 import org.junit.Assert.fail
 import org.junit.Test
-import org.mockito.invocation.InvocationOnMock
 
 class RepoInteractorTest {
 
@@ -27,7 +26,7 @@ class RepoInteractorTest {
         whenever(underTest.repositoryModelConverter.convert(repo2)).thenReturn(repositoryViewModel2)
         whenever(underTest.repositoryRepository.listRepositories(any(), any()))
                 .thenAnswer {
-                    it.getOnSuccessArgument().invoke(repos)
+                    it.invokeReposSuccess(repos)
                 }
 
         underTest.listRepositories(
@@ -46,7 +45,7 @@ class RepoInteractorTest {
         whenever(underTest.errorHandler.handle(exception)).thenReturn(handledException)
         whenever(underTest.repositoryRepository.listRepositories(any(), any()))
                 .thenAnswer {
-                    it.getOnErrorArgument().invoke(exception)
+                    it.invokeError(exception)
                 }
 
         underTest.listRepositories(
@@ -57,8 +56,5 @@ class RepoInteractorTest {
                     it shouldEqual handledException
                 })
     }
-
-    private fun InvocationOnMock.getOnSuccessArgument() = getArgument<((a: (List<Repo>)) -> Unit)>(0)
-    private fun InvocationOnMock.getOnErrorArgument() = getArgument<((b: (Exception)) -> Unit)>(1)
 
 }
