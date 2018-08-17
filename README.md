@@ -6,7 +6,7 @@
  <br>
  <img src='https://github.com/code-schreiber/Replorer/raw/master/app/src/main/ic_launcher-web.png' width='100' height='100'/>
  <br>
- 📁 GitHub Repository Explorer 📂 🗂️
+ 📁 GitHub Repository Explorer 📂
 </p>
   
 This project is a demo android app that connects to the GitHub API to show the list of public repositories in this GitHub account.
@@ -17,3 +17,5 @@ The challenge here is to **not** use external libraries, only the Android Suppor
 This project is written in Kotlin and uses Model-View-Presenter for better testability.
 
 The app is built and unit tested with the help of Travis CI.
+
+The app's icon is designed to burn your eyes with a strategic combination of neon colors.
