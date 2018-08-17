@@ -29,7 +29,6 @@ class GitHubApiService(private val jsonRepoConverter: JsonRepoConverter = JsonRe
         }
     }
 
-    // TODO write tests
     private fun makeEndpointCall(endpoint: String): String {
         val url = URL("$API_BASE_URL$endpoint")
         val connection = url.openConnection() as HttpURLConnection

@@ -41,14 +41,15 @@ class RepoPresenter(private val repoInteractor: RepoInteractor = RepoInteractor(
     }
 
     @VisibleForTesting
-    internal fun success(it: List<RepositoryViewModel>) {
-        view.setViewModels(it.sortedWith(compareByDescending { it.updatedAt }))
+    internal fun success(viewModels: List<RepositoryViewModel>) {
+        val sorted = viewModels.sortedWith(compareByDescending { it.updatedAt })
+        view.setViewModels(sorted)
         view.hideLoading()
     }
 
     @VisibleForTesting
-    internal fun error(it: Exception) {
-        when (it) {
+    internal fun error(exception: Exception) {
+        when (exception) {
             is NoConnectionException -> view.showNoConnectionError()
             else -> view.showDefaultError()
         }
