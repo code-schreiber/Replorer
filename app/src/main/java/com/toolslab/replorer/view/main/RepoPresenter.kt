@@ -2,10 +2,12 @@ package com.toolslab.replorer.view.main
 
 import android.os.Handler
 import android.os.Looper
+import android.support.annotation.VisibleForTesting
 import com.toolslab.replorer.base_mvp.BasePresenter
 import com.toolslab.replorer.base_repository.exception.NoConnectionException
+import com.toolslab.replorer.base_repository.model.RepositoryViewModel
 
-class RepoPresenter(internal val repoInteractor: RepoInteractor = RepoInteractor())
+class RepoPresenter(private val repoInteractor: RepoInteractor = RepoInteractor())
     : BasePresenter<RepoContract.View>(), RepoContract.Presenter {
 
     internal lateinit var backgroundThread: Thread
@@ -26,21 +28,31 @@ class RepoPresenter(internal val repoInteractor: RepoInteractor = RepoInteractor
             repoInteractor.listRepositories(
                     {
                         onUi {
-                            view.setViewModels(it.sortedWith(compareByDescending { it.updatedAt }))
-                            view.hideLoading()
+                            success(it)
                         }
                     },
                     {
                         onUi {
-                            when (it) {
-                                is NoConnectionException -> view.showNoConnectionError()
-                                else -> view.showDefaultError()
-                            }
-                            view.hideLoading()
+                            error(it)
                         }
                     })
         }
         backgroundThread.start()
+    }
+
+    @VisibleForTesting
+    internal fun success(it: List<RepositoryViewModel>) {
+        view.setViewModels(it.sortedWith(compareByDescending { it.updatedAt }))
+        view.hideLoading()
+    }
+
+    @VisibleForTesting
+    internal fun error(it: Exception) {
+        when (it) {
+            is NoConnectionException -> view.showNoConnectionError()
+            else -> view.showDefaultError()
+        }
+        view.hideLoading()
     }
 
     private fun onUi(function: () -> Unit) {
