@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Card">
+
+    <LinearLayout style="@style/CardLayout">
+
+        <TextView
+            android:id="@+id/item_repository_name"
+            style="@style/CardTextView"
+            android:drawableStart="@drawable/ic_folder_open_black_24dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/font_huge"
+            tools:text="A name name name name" />
+
+        <TextView
+            android:id="@+id/item_repository_description"
+            style="@style/CardTextView"
+            android:drawableStart="@drawable/ic_description_black_24dp"
+            android:textSize="@dimen/font_normal"
+            tools:text="A description description description description" />
+
+        <TextView
+            android:id="@+id/item_repository_language"
+            style="@style/CardTextView"
+            android:drawableStart="@drawable/ic_code_black_24dp"
+            android:textSize="@dimen/font_normal"
+            tools:text="A language language language language" />
+
+        <TextView
+            android:id="@+id/item_repository_updated_at"
+            style="@style/CardTextView"
+            android:drawableStart="@drawable/ic_time_black_24dp"
+            android:textSize="@dimen/font_small"
+            tools:text="A date date date date" />
+
+        <TextView
+            android:id="@+id/item_repository_license"
+            style="@style/CardTextView"
+            android:drawableStart="@drawable/ic_legal_black_24dp"
+            android:textSize="@dimen/font_small"
+            tools:text="A license license license license" />
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
