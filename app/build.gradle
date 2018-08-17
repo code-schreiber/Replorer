@@ -1,0 +1,30 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+android {
+    defaultConfig {
+        minSdkVersion Versions.minSdkVersion
+        targetSdkVersion Versions.targetSdkVersion
+        compileSdkVersion Versions.compileSdkVersion
+        versionCode Versions.versionCode
+        versionName Versions.versionName
+        resConfigs "en"
+    }
+
+    lintOptions {
+        abortOnError true
+    }
+}
+
+dependencies {
+    implementation Dependencies.kotlin
+
+    implementation Dependencies.appCompat
+    implementation Dependencies.recyclerView
+    implementation Dependencies.cardView
+
+    testImplementation Dependencies.mockitoKotlin
+    testImplementation Dependencies.kluent
+}
