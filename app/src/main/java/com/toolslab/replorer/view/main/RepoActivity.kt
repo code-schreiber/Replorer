@@ -39,7 +39,6 @@ class RepoActivity(private val presenter: RepoContract.Presenter = RepoPresenter
         recyclerView.visibility = VISIBLE
     }
 
-
     override fun setViewModels(viewModels: List<RepositoryViewModel>) {
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(this)

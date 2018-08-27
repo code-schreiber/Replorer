@@ -12,8 +12,8 @@ import kotlinx.android.synthetic.main.item_repository.view.*
 import java.text.SimpleDateFormat
 import java.util.*
 
-class RepositoriesAdapter(private val viewModels: List<RepositoryViewModel>)
-    : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+internal class RepositoriesAdapter(private val viewModels: List<RepositoryViewModel>)
+    : RecyclerView.Adapter<RepositoriesAdapter.ViewHolder>() {
 
     @VisibleForTesting
     internal class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -24,19 +24,20 @@ class RepositoriesAdapter(private val viewModels: List<RepositoryViewModel>)
         internal val license = view.item_repository_license
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoriesAdapter.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_repository, parent, false)
         return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(viewHolder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         val viewModel = viewModels[position]
-        val holder = viewHolder as ViewHolder
-        holder.name.text = viewModel.name
-        holder.description.text = viewModel.description
-        holder.updatedAt.text = extractRelativeTimeSpan(viewModel.updatedAt)
-        holder.language.text = viewModel.language
-        holder.license.text = viewModel.license
+        viewHolder.apply {
+            name.text = viewModel.name
+            description.text = viewModel.description
+            updatedAt.text = extractRelativeTimeSpan(viewModel.updatedAt)
+            language.text = viewModel.language
+            license.text = viewModel.license
+        }
     }
 
     override fun getItemCount() = viewModels.size
